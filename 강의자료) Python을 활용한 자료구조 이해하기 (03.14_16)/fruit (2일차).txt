@@ -1,0 +1,14 @@
+apple
+apple
+banana
+grape 
+mango
+jujube
+grape
+citron
+mango
+grape
+melon
+grape 
+
+
