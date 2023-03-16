@@ -62,30 +62,28 @@ class LinkedList:
 
 
     def del_data(self, val) -> None:
-        # curr = self.root
-        # cnt = 0
-        # if curr is None:
-        #     print('현재 예약 고객은 0명 입니다.')
-        #     cnt = 1
-        # elif curr.name == val:
-        #     print('{} 님의 예약 정보를 삭제합니다.'.format(curr.name))
-        #     self.root = curr.next
-        #     cnt = 1
-        # else:
-        #     while curr.next:
-        #         if curr.next.next:
-        #             if curr.next.name == val:
-        #                 print('{} 님의 예약 정보를 삭제합니다.'.format(curr.next.name))
-        #                 curr.next = curr.next.next
-        #                 cnt = 1                    
-        #             curr = curr.next
-        #         else:                    
-        #             print('{} 님의 예약 정보를 삭제합니다.'.format(curr.next.name))
-        #             curr.next = None
-        #             cnt = 1
-        # if cnt == 0:
-        #     print('{}님은 현재 예약 명단에 없습니다.'.format(val))
-        pass
+        curr = self.root
+        cnt = 0
+        if curr is None:
+            print('현재 예약 고객은 0명 입니다.')
+            cnt = 2
+        else:
+            while curr.next.next:
+                if curr.next.name == val:
+                    curr.next = curr.next.next
+                    cnt = 1
+                else:
+                    curr = curr.next
+            if curr.next:
+                if curr.next.name == val:
+                    curr.next = None
+                    cnt = 1
+
+        if cnt == 0:
+            print('{}님은 현재 예약 명단에 없습니다.'.format(val))
+        elif cnt == 1:
+            print('{}님의 예약을 취소 합니다.'.format(val))
+        # pass
 
 
     def write_data(self) -> list:
@@ -111,7 +109,7 @@ def reserve_product(ds: LinkedList):
     # 사용자로부터 정보를 입력 받아 Node를 구성
     # Node를 LinkedList의 끝(root에서 가장 먼 곳)에 추가
     import re
-    p = re.compile(r'[0-9]{3}-[0-9]{4}-[0-9]{4}')
+    p = re.compile(r'^[0-9]{3}-[0-9]{4}-[0-9]{4}$')
 
     print('[고객 정보]')
     name = input('이름 : ')
@@ -120,7 +118,7 @@ def reserve_product(ds: LinkedList):
     while len(re.findall(p, tel)) < 1:
         print('잘못된 전화번호 양식 입니다.')
         tel = input('번호 : ')
-    
+
     phone = input('기종 : ')
 
     ds.add_data_rear(Node(name, tel, phone))
